@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyFavsAssigment</string>
+    <string name="hello_">Hello!!, Application starting… wait for it</string>
 </resources>
