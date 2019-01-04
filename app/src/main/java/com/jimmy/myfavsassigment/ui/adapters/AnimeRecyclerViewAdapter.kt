@@ -36,7 +36,7 @@ class AnimeRecyclerViewAdapter (private var items: ArrayList<AnimeObj>, private 
 
     // interface for click handeling
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(position: Int, aniOb : AnimeObj? = null)
     }
 
 
@@ -49,7 +49,7 @@ class AnimeRecyclerViewAdapter (private var items: ArrayList<AnimeObj>, private 
 
             if (listener != null) {
                 // can replace parameter with _ if you don’t use it
-                binding.root.setOnClickListener({ _ -> listener.onItemClick(layoutPosition) })
+                binding.root.setOnClickListener { _ -> listener.onItemClick(layoutPosition, ani) }
             }
             binding.executePendingBindings()
         }

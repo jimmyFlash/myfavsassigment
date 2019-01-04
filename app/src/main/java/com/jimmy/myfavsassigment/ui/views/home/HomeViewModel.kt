@@ -61,8 +61,9 @@ class HomeViewModel : ViewModel() {
             })
     }
 
-    fun refreshRepositories(){
+    fun refreshRepositories(position: Int, rating: Int) {
 
+        animeRepository.updateRepStarRating(position, rating)
     }
 
 

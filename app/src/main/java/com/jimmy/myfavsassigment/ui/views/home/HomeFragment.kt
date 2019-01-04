@@ -6,12 +6,13 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jimmy.myfavsassigment.R
+import com.jimmy.myfavsassigment.businesslogic.models.AnimeObj
 import com.jimmy.myfavsassigment.databinding.HomeFragmentBinding
 import com.jimmy.myfavsassigment.ui.adapters.AnimeRecyclerViewAdapter
 import com.jimmy.myfavsassigment.ui.extensions.errorDialog
@@ -19,8 +20,15 @@ import com.jimmy.myfavsassigment.ui.extensions.errorDialog
 
 class HomeFragment : Fragment(), AnimeRecyclerViewAdapter.OnItemClickListener {
 
-    override fun onItemClick(position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onItemClick(position: Int, aniOb: AnimeObj?) {
+
+        /* Create an instance of the dialog fragment and show it */
+        val dialog = RatingDialogFrag.newInstance()
+        val args = Bundle()
+        args.putInt("oldRating", aniOb?.numberOfStars!!)
+        args.putInt("pos", position)
+        dialog.arguments = args
+        dialog.show(activity?.supportFragmentManager, "AddListDialogFragment")
     }
 
     companion object {
@@ -68,6 +76,13 @@ class HomeFragment : Fragment(), AnimeRecyclerViewAdapter.OnItemClickListener {
         })
 
         myHomeFragmentBinding.executePendingBindings()
+    }
+
+
+    fun updateItemRating(position: Int, rating: Int){
+
+        Log.e("iohoihohoihoih", "postion $position & rating $rating")
+        homeViewModel.refreshRepositories(position, rating)
     }
 
 }

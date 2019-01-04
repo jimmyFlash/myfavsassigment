@@ -2,5 +2,8 @@
     <string name="app_name">MyFavsAssigment</string>
     <string name="hello_">Hello!!, \n this is my fav. Japanese anime list</string>
     <string name="load_data">Refresh/randomize</string>
-    <string name="error">An error occured</string>
+    <string name="error">An error occurred</string>
+    <string name="enter_rating">Enter rating</string>
+    <string name="yourRating">Your rating:</string>
+    <string name="click_item_to_rate_it">Click item to rate it</string>
 </resources>
