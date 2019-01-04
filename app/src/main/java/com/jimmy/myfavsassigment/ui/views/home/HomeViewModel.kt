@@ -10,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 class HomeViewModel : ViewModel() {
 
@@ -37,7 +38,7 @@ class HomeViewModel : ViewModel() {
 
 
         compositeDisposable += animeRepository.getRepositories()// load the repositories, retuns RxJava Observable
-            .subscribeOn(Schedulers.newThread()) 
+            .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object: DisposableObserver<ArrayList<AnimeObj>>() {
 
@@ -50,6 +51,8 @@ class HomeViewModel : ViewModel() {
 
                 // Every time when Observable emits the data onNext() method will be called.
                 override fun onNext(data: ArrayList<AnimeObj>) {
+                    data.sortWith(compareBy<AnimeObj> { it.numberOfStars })
+                    data.reverse()
                     repositories.value = data
                 }
 
@@ -59,6 +62,7 @@ class HomeViewModel : ViewModel() {
                     isLoading.set(false)
                 }
             })
+
     }
 
     fun refreshRepositories(position: Int, rating: Int) {
