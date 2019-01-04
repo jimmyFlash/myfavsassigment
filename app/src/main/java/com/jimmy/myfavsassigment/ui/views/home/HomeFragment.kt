@@ -4,6 +4,7 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -78,14 +79,14 @@ class HomeFragment : Fragment(), AnimeRecyclerViewAdapter.OnItemClickListener, R
 
         })
 
+        homeViewModel.shuffleOn.observe(this, Observer {
+
+            if(it == true) myHomeFragmentBinding.refreshButton.setBackgroundColor(Color.RED)
+            else myHomeFragmentBinding.refreshButton.setBackgroundColor(Color.GRAY)
+        })
+
         myHomeFragmentBinding.executePendingBindings()
     }
 
-
-    fun updateItemRating(position: Int, rating: Int){
-
-        Log.e("iohoihohoihoih", "postion $position & rating $rating")
-//        homeViewModel.refreshRepositories(position, rating)
-    }
 
 }

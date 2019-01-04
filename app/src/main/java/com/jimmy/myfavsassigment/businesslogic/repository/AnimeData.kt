@@ -6,17 +6,16 @@ import java.util.concurrent.TimeUnit
 
 class AnimeData {
 
-    private lateinit var arrayList: ArrayList<AnimeObj>
+    private var arrayList: ArrayList<AnimeObj> = ArrayList()
 
 
     init {
-        arrayList = ArrayList()
 
         arrayList.add(AnimeObj("Attack on titan", 5))
         arrayList.add(AnimeObj("Tokyo ghoul", 4))
         arrayList.add(AnimeObj("Sword art online",  2))
         arrayList.add(AnimeObj("Claymore", 5))
-        arrayList.add(AnimeObj("Second from remote",  4))
+        arrayList.add(AnimeObj("Death note",  4))
 
         arrayList.add(AnimeObj("My hero academia", 5))
         arrayList.add(AnimeObj("Cells at work",  4))

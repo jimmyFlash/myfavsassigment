@@ -3,6 +3,7 @@ package com.jimmy.myfavsassigment.ui.views.home
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
+import android.os.Handler
 import com.jimmy.myfavsassigment.businesslogic.models.AnimeObj
 import com.jimmy.myfavsassigment.businesslogic.repository.AnimeRepository
 import com.jimmy.myfavsassigment.ui.extensions.plusAssign
@@ -19,14 +20,17 @@ class HomeViewModel : ViewModel() {
 
     // loding display indicator binder feild
     val isLoading = ObservableField(false)
+    val shuffleOn = MutableLiveData<Boolean>()
 
     var repositories = MutableLiveData< ArrayList<AnimeObj> >()
     var error = MutableLiveData<Boolean>()
 
     private val compositeDisposable = CompositeDisposable()
 
+
     init {
         error.value = false
+        shuffleOn.value = false
     }
 
 
@@ -71,7 +75,38 @@ class HomeViewModel : ViewModel() {
         loadRepositories()
     }
 
+
+    private lateinit var mHandler: Handler
+
+    private lateinit var runner: Runnable
+
     fun randomRateRepo(){
+
+        if(shuffleOn.value == false){
+            shuffleOn.value = true
+            shuff()
+        }else{
+            shuffleOn.value = false
+            mHandler.removeCallbacks(runner)
+        }
+    }
+
+    fun shuff(){
+
+        val rand = Random()
+        val shuffleInterval = rand.nextInt(5000) + 1000
+        val star = rand.nextInt(4)
+        var itemPos = repositories.value?.size?.let { rand.nextInt(it) }
+        if(itemPos!! >= repositories.value?.size!!){
+            itemPos = 0
+        }
+
+
+        refreshRepositories(itemPos!!, star)
+
+        mHandler = Handler()
+        runner = Runnable { shuff() }
+        mHandler.postDelayed(runner, shuffleInterval.toLong())
 
     }
 
