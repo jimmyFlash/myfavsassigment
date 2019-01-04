@@ -18,12 +18,15 @@ import com.jimmy.myfavsassigment.ui.adapters.AnimeRecyclerViewAdapter
 import com.jimmy.myfavsassigment.ui.extensions.errorDialog
 
 
-class HomeFragment : Fragment(), AnimeRecyclerViewAdapter.OnItemClickListener {
+class HomeFragment : Fragment(), AnimeRecyclerViewAdapter.OnItemClickListener, RatingDialogFrag.ClickHandler {
+    override fun onItemClick(position: Int, rating: Int) {
+        homeViewModel.refreshRepositories(position, rating)
+    }
 
     override fun onItemClick(position: Int, aniOb: AnimeObj?) {
 
         /* Create an instance of the dialog fragment and show it */
-        val dialog = RatingDialogFrag.newInstance()
+        val dialog = RatingDialogFrag.newInstance(this)
         val args = Bundle()
         args.putInt("oldRating", aniOb?.numberOfStars!!)
         args.putInt("pos", position)
@@ -82,7 +85,7 @@ class HomeFragment : Fragment(), AnimeRecyclerViewAdapter.OnItemClickListener {
     fun updateItemRating(position: Int, rating: Int){
 
         Log.e("iohoihohoihoih", "postion $position & rating $rating")
-        homeViewModel.refreshRepositories(position, rating)
+//        homeViewModel.refreshRepositories(position, rating)
     }
 
 }

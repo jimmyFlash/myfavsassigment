@@ -8,11 +8,9 @@ class AnimeData {
 
     private lateinit var arrayList: ArrayList<AnimeObj>
 
-    /**
-     *
-     */
-    fun getRepositories() : Observable<ArrayList<AnimeObj>> {
-         arrayList = ArrayList()
+
+    init {
+        arrayList = ArrayList()
 
         arrayList.add(AnimeObj("Attack on titan", 5))
         arrayList.add(AnimeObj("Tokyo ghoul", 4))
@@ -26,17 +24,21 @@ class AnimeData {
         arrayList.add(AnimeObj("Baki", 5))
         arrayList.add(AnimeObj("One piece",  4))
 
+    }
+
+    /**
+     *
+     */
+    fun getRepositories() : Observable<ArrayList<AnimeObj>> {
 
         return Observable.just(arrayList)
             .delay(1, TimeUnit.SECONDS)
     }
 
-    fun updateAnimeRating(pos : Int, stars : Int): Observable<ArrayList<AnimeObj>>{
+    fun updateAnimeRating(pos : Int, stars : Int){
 
         val animeObj = arrayList[pos]
             animeObj.numberOfStars = stars
 
-        return Observable.just(arrayList)
-            .delay(1, TimeUnit.SECONDS)
     }
 }

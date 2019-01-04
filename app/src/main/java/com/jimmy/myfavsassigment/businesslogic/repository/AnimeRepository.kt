@@ -13,7 +13,7 @@ class AnimeRepository {
     }
 
 
-    fun updateRepStarRating(position: Int, rating: Int){
+    fun updateRepStarRating(position: Int, rating: Int) {
         animeDataSource.updateAnimeRating(position, rating)
     }
 

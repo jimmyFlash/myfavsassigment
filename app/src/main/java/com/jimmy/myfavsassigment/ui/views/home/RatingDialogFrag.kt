@@ -2,7 +2,6 @@ package com.jimmy.myfavsassigment.ui.views.home
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
@@ -10,14 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
-import com.jimmy.myfavsassigment.businesslogic.models.AnimeObj
 import com.jimmy.myfavsassigment.databinding.RatingsDialogLayoutBinding
 
 
 class RatingDialogFrag : DialogFragment() {
 
     companion object {
-        fun newInstance() = RatingDialogFrag()
+        private lateinit var homF: ClickHandler
+
+        fun newInstance(homeFragment: ClickHandler) : RatingDialogFrag{
+
+            homF = homeFragment
+           return RatingDialogFrag()
+        }
     }
 
 
@@ -78,7 +82,7 @@ class RatingDialogFrag : DialogFragment() {
             positiveButton.setOnClickListener({
                 if(binding.editTextRating.text.toString().length > 0){
                     d.dismiss()
-                    (activity as ClickHandler)?.onItemClick(getRefNum, binding.editTextRating.text.toString().toInt())
+                    (homF as ClickHandler)?.onItemClick(getRefNum, binding.editTextRating.text.toString().toInt())
                 }
             })
         }
