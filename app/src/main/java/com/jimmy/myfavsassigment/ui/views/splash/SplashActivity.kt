@@ -1,9 +1,10 @@
-package com.jimmy.myfavsassigment
+package com.jimmy.myfavsassigment.ui.views.splash
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.Window
+import com.jimmy.myfavsassigment.R
 import com.jimmy.myfavsassigment.ui.extensions.start
 import com.jimmy.myfavsassigment.ui.views.home.HomeActivity
 
