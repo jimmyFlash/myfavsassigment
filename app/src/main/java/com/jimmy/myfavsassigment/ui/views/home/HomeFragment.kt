@@ -66,7 +66,10 @@ class HomeFragment : Fragment(), AnimeRecyclerViewAdapter.OnItemClickListener, R
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
         myHomeFragmentBinding.viewModel = homeViewModel
-        homeViewModel.loadRepositories()
+
+        if(savedInstanceState == null) {
+            homeViewModel.loadRepositories()
+        }
 
         homeViewModel.repositories.observe(this, Observer {
 
@@ -86,6 +89,17 @@ class HomeFragment : Fragment(), AnimeRecyclerViewAdapter.OnItemClickListener, R
         })
 
         myHomeFragmentBinding.executePendingBindings()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
     }
 
 
