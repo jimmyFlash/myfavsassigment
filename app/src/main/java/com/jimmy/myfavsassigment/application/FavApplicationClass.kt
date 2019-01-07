@@ -7,8 +7,12 @@ import com.jimmy.myfavsassigment.dagger.DaggerAppComponent
 
 class FavApplicationClass : Application() {
 
+    lateinit var favAppComponent: AppComponent
+
     override fun onCreate() {
         super.onCreate()
+        //    This initializes the wikiComponent field when the application first starts up.
+        favAppComponent = initDagger(this)
     }
 
     // initialize AppComponent

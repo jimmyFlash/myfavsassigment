@@ -16,13 +16,13 @@ class RespositoryModule {
      * the @Provides annotation tells Dagger where to find it.
      */
     @Singleton
-            /**
-             * The @Singleton annotation is not part of the Dagger API. It’s contained inside the javax package
-             *  added to build.gradle . It tells Dagger that there should only be a single instance of that
-             *  dependency. So when generating the code Dagger will handle all the logic for you,
-             *  and you won’t write all the boilerplate code to check if another instance of the object
-             *  is already available.
-             */
+    /**
+     * The @Singleton annotation is not part of the Dagger API. It’s contained inside the javax package
+     *  added to build.gradle . It tells Dagger that there should only be a single instance of that
+     *  dependency. So when generating the code Dagger will handle all the logic for you,
+     *  and you won’t write all the boilerplate code to check if another instance of the object
+     *  is already available.
+     */
     fun provideAnimeRepository(): AnimeRepository = AnimeRepository()
 
 }

@@ -1,9 +1,12 @@
 package com.jimmy.myfavsassigment.ui.views.home
 
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.os.Handler
+import com.jimmy.myfavsassigment.application.FavApplicationClass
 import com.jimmy.myfavsassigment.businesslogic.models.AnimeObj
 import com.jimmy.myfavsassigment.businesslogic.repository.AnimeRepository
 import com.jimmy.myfavsassigment.ui.extensions.plusAssign
@@ -12,11 +15,14 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import java.util.*
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel (application : Application) : AndroidViewModel(application) {
 
 
-    var animeRepository : AnimeRepository = AnimeRepository()
+
+    @Inject
+    lateinit var animeRepository: AnimeRepository
 
     // loding display indicator binder feild
     val isLoading = ObservableField(false)
@@ -31,6 +37,17 @@ class HomeViewModel : ViewModel() {
     init {
         error.value = false
         shuffleOn.value = false
+
+        /*
+     You are getting the AppComponent from WikiApplication and asking it to inject all known
+     dependencies into HomepageActivity. Since you annotated presenter with @Inject,
+     Dagger will inject a concrete HomepagePresenter object into HomepageActivity
+
+     Dagger knows that you defined provideHomepagePresenter() in the PresenterModule class,
+      and uses it to create the injected HomepagePresenter object.
+    */
+        (application as FavApplicationClass).favAppComponent.inject(this)
+
     }
 
 
