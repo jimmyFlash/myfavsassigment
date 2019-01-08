@@ -3,7 +3,6 @@ package com.jimmy.myfavsassigment.ui.views.home
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.os.Handler
 import com.jimmy.myfavsassigment.application.FavApplicationClass
@@ -38,14 +37,6 @@ class HomeViewModel (application : Application) : AndroidViewModel(application) 
         error.value = false
         shuffleOn.value = false
 
-        /*
-     You are getting the AppComponent from WikiApplication and asking it to inject all known
-     dependencies into HomepageActivity. Since you annotated presenter with @Inject,
-     Dagger will inject a concrete HomepagePresenter object into HomepageActivity
-
-     Dagger knows that you defined provideHomepagePresenter() in the PresenterModule class,
-      and uses it to create the injected HomepagePresenter object.
-    */
         (application as FavApplicationClass).favAppComponent.inject(this)
 
     }
